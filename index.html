@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NAC CMYAA 2025 Video - Timeline Sheet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            color: #2c3e50;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .sheet-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .sheet-header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .sheet-header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .sheet-header p {
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+
+        .project-summary {
+            padding: 1.5rem 2rem;
+            background: #ecf0f1;
+            border-bottom: 2px solid #bdc3c7;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            text-align: center;
+        }
+
+        .summary-item {
+            background: white;
+            padding: 1rem;
+            border-radius: 6px;
+            border-left: 4px solid #3498db;
+        }
+
+        .summary-item .label {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .summary-item .value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        .timeline-table-container {
+            overflow-x: auto;
+            padding: 0;
+        }
+
+        .timeline-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        .timeline-table th {
+            background: #34495e;
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        .timeline-table th:first-child {
+            width: 80px;
+            text-align: center;
+        }
+
+        .timeline-table th:nth-child(2) {
+            width: 200px;
+        }
+
+        .timeline-table th:nth-child(3) {
+            width: 150px;
+        }
+
+        .timeline-table th:nth-child(4) {
+            width: 120px;
+        }
+
+        .timeline-table td {
+            padding: 1.2rem 1rem;
+            border-bottom: 1px solid #ecf0f1;
+            vertical-align: top;
+        }
+
+        .timeline-table tbody tr {
+            transition: background-color 0.2s ease;
+        }
+
+        .timeline-table tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .timeline-table tbody tr:nth-child(even) {
+            background: #fafbfc;
+        }
+
+        .timeline-table tbody tr:nth-child(even):hover {
+            background: #f1f3f4;
+        }
+
+        .draft-number {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        .draft-title {
+            font-weight: 700;
+            color: #2c3e50;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .draft-description {
+            color: #5a6c7d;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .date-range {
+            background: #e8f4fd;
+            color: #2980b9;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: 1px solid #d6eaf8;
+        }
+
+        .working-days {
+            color: #7f8c8d;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        .delivery-date {
+            background: #e8f5e8;
+            color: #27ae60;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            display: inline-block;
+            border: 1px solid #a9dfbf;
+        }
+
+        .client-feedback {
+            background: #fff8e1;
+            color: #f57c00;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            display: inline-block;
+            border: 1px solid #ffcc02;
+        }
+
+        .duration {
+            background: #f0f3f7;
+            color: #34495e;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .status {
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .status.pending {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+
+        .status.in-progress {
+            background: #cce5ff;
+            color: #004085;
+            border: 1px solid #74b9ff;
+        }
+
+        .status.completed {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #00b894;
+        }
+
+        .status {
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .status:hover {
+            transform: scale(1.05);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .notes-section {
+            padding: 2rem;
+            background: #f8f9fa;
+            border-top: 2px solid #e9ecef;
+        }
+
+        .notes-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .notes-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 6px;
+            border-left: 4px solid #3498db;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .notes-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .notes-list li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .notes-list li::before {
+            content: '•';
+            color: #3498db;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .footer-info {
+            padding: 1.5rem 2rem;
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .footer-info .highlight {
+            color: #3498db;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .sheet-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-table {
+                font-size: 0.85rem;
+            }
+
+            .timeline-table th,
+            .timeline-table td {
+                padding: 0.8rem 0.6rem;
+            }
+
+            .draft-description {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media print {
+            body {
+                padding: 0;
+                background: white;
+            }
+
+            .sheet-container {
+                box-shadow: none;
+            }
+
+            .timeline-table tbody tr:hover {
+                background: inherit;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sheet-container">
+        <div class="sheet-header">
+            <h1>📋 NAC CMYAA 2025 Video Project</h1>
+            <p>Timeline & Delivery Schedule Sheet</p>
+        </div>
+
+        <div class="project-summary">
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <div class="label">Start Date</div>
+                    <div class="value">Oct 1, 2024</div>
+                </div>
+                <div class="summary-item">
+                    <div class="label">End Date</div>
+                    <div class="value">Oct 31, 2024</div>
+                </div>
+                <div class="summary-item">
+                    <div class="label">Total Duration</div>
+                    <div class="value">23 Working Days</div>
+                </div>
+                <div class="summary-item">
+                    <div class="label">Total Drafts</div>
+                    <div class="value">4 Iterations</div>
+                </div>
+                <div class="summary-item">
+                    <div class="label">Buffer Time</div>
+                    <div class="value">2 Days</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-table-container">
+            <table class="timeline-table">
+                <thead>
+                    <tr>
+                        <th>Draft</th>
+                        <th>Phase Description</th>
+                        <th>Date Range</th>
+                        <th>Duration</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="draft-number">1</div>
+                        </td>
+                        <td>
+                            <div class="draft-title">Initial Cut</div>
+                            <div class="draft-description">
+                                First draft focusing on initial cut and basic structure. Establish overall flow, basic transitions, and rough timing.
+                            </div>
+                            <div class="working-days">Working Days: Oct 1, 2, 3, 4, 7</div>
+                            <div class="delivery-date">📅 Delivery: Oct 7, 2024</div>
+                            <div class="client-feedback">💬 Client Feedback: Oct 8, 2024</div>
+                        </td>
+                        <td>
+                            <div class="date-range">Oct 1 - 8</div>
+                        </td>
+                        <td>
+                            <div class="duration">6 Days</div>
+                        </td>
+                        <td>
+                            <div class="status pending" onclick="toggleStatus(this)">Pending</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="draft-number">2</div>
+                        </td>
+                        <td>
+                            <div class="draft-title">Refinements</div>
+                            <div class="draft-description">
+                                Second draft incorporating feedback from initial cut. Refine transitions, improve pacing, and enhance narrative flow.
+                            </div>
+                            <div class="working-days">Working Days: Oct 9, 10, 11, 14, 15</div>
+                            <div class="delivery-date">📅 Delivery: Oct 15, 2024</div>
+                            <div class="client-feedback">💬 Client Feedback: Oct 16, 2024</div>
+                        </td>
+                        <td>
+                            <div class="date-range">Oct 9 - 16</div>
+                        </td>
+                        <td>
+                            <div class="duration">6 Days</div>
+                        </td>
+                        <td>
+                            <div class="status pending" onclick="toggleStatus(this)">Pending</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="draft-number">3</div>
+                        </td>
+                        <td>
+                            <div class="draft-title">Polish & Advanced Refinements</div>
+                            <div class="draft-description">
+                                Third draft with advanced refinements, polishing visual elements, fine-tuning audio, and implementing detailed feedback.
+                            </div>
+                            <div class="working-days">Working Days: Oct 17, 18, 21, 22, 23</div>
+                            <div class="delivery-date">📅 Delivery: Oct 23, 2024</div>
+                            <div class="client-feedback">💬 Client Feedback: Oct 24, 2024</div>
+                        </td>
+                        <td>
+                            <div class="date-range">Oct 17 - 24</div>
+                        </td>
+                        <td>
+                            <div class="duration">6 Days</div>
+                        </td>
+                        <td>
+                            <div class="status pending" onclick="toggleStatus(this)">Pending</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="draft-number">4</div>
+                        </td>
+                        <td>
+                            <div class="draft-title">Final Production</div>
+                            <div class="draft-description">
+                                Final draft with complete color correction, audio mastering, final touches, and delivery preparation. Export ready.
+                            </div>
+                            <div class="working-days">Working Days: Oct 25, 28, 29, 30, 31</div>
+                            <div class="delivery-date">📅 Final Delivery: Oct 31, 2024</div>
+                        </td>
+                        <td>
+                            <div class="date-range">Oct 25 - 31</div>
+                        </td>
+                        <td>
+                            <div class="duration">5 Days</div>
+                        </td>
+                        <td>
+                            <div class="status pending" onclick="toggleStatus(this)">Pending</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="notes-section">
+            <div class="notes-title">📝 Project Notes</div>
+            <div class="notes-content">
+                <ul class="notes-list">
+                    <li><strong>Weekend Schedule:</strong> No work scheduled on weekends (Saturday & Sunday)</li>
+                    <li><strong>Feedback Cycles:</strong> 1-day buffer for client review and feedback after each draft delivery</li>
+                    <li><strong>Delivery Format:</strong> Final video exported in requested format and resolution</li>
+                    <li><strong>Revision Policy:</strong> Minor revisions included within each draft phase</li>
+                    <li><strong>Communication:</strong> Progress updates provided at the end of each working day</li>
+                    <li><strong>Backup & Security:</strong> All project files backed up daily with version control</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-info">
+            <p>Final delivery scheduled for <span class="highlight">October 31, 2024</span> • 2 days ahead of November 2nd deadline</p>
+            <p>© 2024 NAC CMYAA 2025 Video Project Timeline Sheet</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleStatus(element) {
+            const currentStatus = element.textContent.trim();
+            
+            // Cycle through statuses: Pending -> In Progress -> Completed -> Pending
+            if (currentStatus === 'Pending') {
+                element.className = 'status in-progress';
+                element.textContent = 'In Progress';
+            } else if (currentStatus === 'In Progress') {
+                element.className = 'status completed';
+                element.textContent = 'Completed';
+            } else if (currentStatus === 'Completed') {
+                element.className = 'status pending';
+                element.textContent = 'Pending';
+            }
+        }
+
+        // Optional: Add keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                if (e.target.classList.contains('status')) {
+                    e.preventDefault();
+                    toggleStatus(e.target);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
